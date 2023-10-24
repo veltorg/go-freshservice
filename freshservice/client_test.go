@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/CoreyGriffin/go-freshservice/freshservice"
 	"github.com/stretchr/testify/assert"
+	"github.com/veltorg/go-freshservice/freshservice"
 )
 
 var (

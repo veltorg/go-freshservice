@@ -1,4 +1,4 @@
-module github.com/CoreyGriffin/go-freshservice
+module github.com/veltorg/go-freshservice
 
 go 1.13
 

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	fs "github.com/CoreyGriffin/go-freshservice/freshservice"
+	fs "github.com/veltorg/go-freshservice/freshservice"
 )
 
 func main() {
