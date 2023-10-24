@@ -7,19 +7,14 @@ import (
 
 // RequesterGroups holds a list of Freshservice agents
 type RequesterGroups struct {
-	List []RequesterGroupDetails `json:"agents"`
-}
-
-// RequesterGroup holds the details of a specific Freshservice agent
-type RequesterGroup struct {
-	Details RequesterGroupDetails `json:"agent"`
+	List []RequesterGroupDetails `json:"requester_groups"`
 }
 
 type RequesterGroupDetails struct {
 	ID          int    `json:"id"`
-	Description string `json:"description"`
 	Name        string `json:"name"`
-	Type        string `json:"type"` // manual or rule_based
+	Description string `json:"description"`
+	Type        string `json:"type"`
 }
 
 // Validate will confirm that an agent role is valid
