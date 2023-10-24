@@ -156,3 +156,7 @@ func (fs *Client) BusinessHours() BusinessHoursService {
 func (fs *Client) Tasks() TaskService {
 	return &TaskServiceClient{client: fs}
 }
+
+func (fs *Client) RequesterGroups() RequesterGroupService {
+	return &RequesterGroupServiceClient{client: fs}
+}
