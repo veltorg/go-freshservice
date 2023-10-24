@@ -90,7 +90,7 @@ type AgentListFilter struct {
 func (af *AgentListFilter) QueryString() string {
 	var qs []string
 	if af.PageQuery != "" {
-		qs = append(qs, af.PageQuery)
+		qs = append(qs, af.PageQuery) //per_page=
 	}
 
 	switch {
