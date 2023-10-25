@@ -160,3 +160,7 @@ func (fs *Client) Tasks() TaskService {
 func (fs *Client) RequesterGroups() RequesterGroupService {
 	return &RequesterGroupServiceClient{client: fs}
 }
+
+func (fs *Client) Requesters() RequesterService {
+	return &RequesterServiceClient{client: fs}
+}
