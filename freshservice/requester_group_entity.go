@@ -10,6 +10,10 @@ type RequesterGroups struct {
 	List []RequesterGroupDetails `json:"requester_groups"`
 }
 
+type RequesterGroup struct {
+	Details RequesterGroupDetails `json:"requester_group"`
+}
+
 type RequesterGroupDetails struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
