@@ -101,6 +101,7 @@ func (fs *Client) makeRequest(r *http.Request, v interface{}) (*http.Response, e
 	}
 
 	if res.StatusCode < http.StatusOK || res.StatusCode > 299 {
+		v = ErrorResponse{}
 		return res, fmt.Errorf("%s: error making %s request to %s", strconv.Itoa(res.StatusCode), r.Method, r.URL)
 	}
 
