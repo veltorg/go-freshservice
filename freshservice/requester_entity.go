@@ -8,12 +8,12 @@ import (
 
 // Requesters holds a list of Freshservice Requesters
 type Requesters struct {
-	List []RequesterDetails `json:"Requesters"`
+	List []RequesterDetails `json:"requesters"`
 }
 
 // Requester holds the details of a specific Freshservice Requester
 type Requester struct {
-	Details RequesterDetails `json:"Requester"`
+	Details RequesterDetails `json:"requester"`
 }
 
 // RequesterDetails contains the details of a specific Freshservice Requester
