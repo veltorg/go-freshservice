@@ -13,9 +13,9 @@ const requesterGroupURL = "/api/v2/requester_groups"
 
 type RequesterGroupService interface {
 	List(context.Context, QueryFilter) ([]RequesterGroupDetails, string, error)
-	Create(context.Context, *AgentDetails) (*AgentDetails, error)
-	Get(context.Context, int) (*AgentDetails, error)
-	Update(context.Context, int, *AgentDetails) (*AgentDetails, error)
+	Create(context.Context, *RequesterGroupDetails) (*RequesterGroupDetails, error)
+	Get(context.Context, int) (*RequesterGroupDetails, error)
+	Update(context.Context, int, *RequesterGroupDetails) (*RequesterGroupDetails, error)
 	Delete(context.Context, int) error
 	AddRequesterToGroup(context.Context, int, int) error
 	DeleteRequesterFromGroup(context.Context, int, int) error
