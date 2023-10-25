@@ -32,7 +32,7 @@ type RequesterServiceClient struct {
 }
 
 // List all freshservice Requesters
-func (rs *RequesterServiceClient) List(ctx context.Context, filter QueryFilter) ([]RequesterDetails, string, error) {
+func (rs *RequesterServiceClient) List(ctx context.Context, filter QueryFilter) (*Requesters, string, error) {
 	url := &url.URL{
 		Scheme: "https",
 		Host:   rs.client.Domain,
@@ -54,11 +54,11 @@ func (rs *RequesterServiceClient) List(ctx context.Context, filter QueryFilter) 
 		return nil, "", err
 	}
 
-	return res.List, HasNextPage(resp), nil
+	return res, HasNextPage(resp), nil
 }
 
 // Get a specific Freshservice Requester
-func (rs *RequesterServiceClient) Get(ctx context.Context, id int) (*RequesterDetails, error) {
+func (rs *RequesterServiceClient) Get(ctx context.Context, id int) (*Requester, error) {
 	url := &url.URL{
 		Scheme: "https",
 		Host:   rs.client.Domain,
@@ -75,11 +75,11 @@ func (rs *RequesterServiceClient) Get(ctx context.Context, id int) (*RequesterDe
 		return nil, err
 	}
 
-	return &res.Details, nil
+	return res, nil
 }
 
 // Create a new Freshservice Requester
-func (rs *RequesterServiceClient) Create(ctx context.Context, ad *RequesterDetails) (*RequesterDetails, error) {
+func (rs *RequesterServiceClient) Create(ctx context.Context, ad *RequesterDetails) (*Requester, error) {
 	url := &url.URL{
 		Scheme: "https",
 		Host:   rs.client.Domain,
@@ -103,11 +103,11 @@ func (rs *RequesterServiceClient) Create(ctx context.Context, ad *RequesterDetai
 		return nil, err
 	}
 
-	return &res.Details, nil
+	return res, nil
 }
 
 // Update a Freshservice Requester
-func (rs *RequesterServiceClient) Update(ctx context.Context, id int, ad *RequesterDetails) (*RequesterDetails, error) {
+func (rs *RequesterServiceClient) Update(ctx context.Context, id int, ad *RequesterDetails) (*Requester, error) {
 	url := &url.URL{
 		Scheme: "https",
 		Host:   rs.client.Domain,
@@ -131,12 +131,12 @@ func (rs *RequesterServiceClient) Update(ctx context.Context, id int, ad *Reques
 		return nil, err
 	}
 
-	return &res.Details, nil
+	return res, nil
 
 }
 
 // Delete a Freshservice Requester
-func (rs *RequesterServiceClient) Delete(ctx context.Context, id int) error {
+func (rs *RequesterServiceClient) Delete(ctx context.Context, id int) (*ErrorResponse, error) {
 	url := &url.URL{
 		Scheme: "https",
 		Host:   rs.client.Domain,
@@ -145,18 +145,22 @@ func (rs *RequesterServiceClient) Delete(ctx context.Context, id int) error {
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodDelete, url.String(), nil)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	if _, err := rs.client.makeRequest(req, nil); err != nil {
-		return err
+	res := &ErrorResponse{}
+
+	_, err = rs.client.makeRequest(req, res)
+
+	if err != nil {
+		return nil, err
 	}
 
-	return nil
+	return res, nil
 }
 
 // Deactivate a Frehservice Requester (does not delete)
-func (rs *RequesterServiceClient) Deactivate(ctx context.Context, id int) (*RequesterDetails, error) {
+func (rs *RequesterServiceClient) Deactivate(ctx context.Context, id int) (*Requester, error) {
 	url := &url.URL{
 		Scheme: "https",
 		Host:   rs.client.Domain,
@@ -173,11 +177,11 @@ func (rs *RequesterServiceClient) Deactivate(ctx context.Context, id int) (*Requ
 		return nil, err
 	}
 
-	return &res.Details, nil
+	return res, nil
 }
 
 // Reactivate a Freshservice Requester
-func (rs *RequesterServiceClient) Reactivate(ctx context.Context, id int) (*RequesterDetails, error) {
+func (rs *RequesterServiceClient) Reactivate(ctx context.Context, id int) (*Requester, error) {
 	url := &url.URL{
 		Scheme: "https",
 		Host:   rs.client.Domain,
@@ -194,11 +198,11 @@ func (rs *RequesterServiceClient) Reactivate(ctx context.Context, id int) (*Requ
 		return nil, err
 	}
 
-	return &res.Details, nil
+	return res, nil
 }
 
 // ConvertToAgent will convert a Freshservice Requester to an Agent
-func (rs *RequesterServiceClient) ConvertToAgent(ctx context.Context, id int) (*RequesterDetails, error) {
+func (rs *RequesterServiceClient) ConvertToAgent(ctx context.Context, id int) (*Requester, error) {
 	url := &url.URL{
 		Scheme: "https",
 		Host:   rs.client.Domain,
@@ -215,11 +219,11 @@ func (rs *RequesterServiceClient) ConvertToAgent(ctx context.Context, id int) (*
 		return nil, err
 	}
 
-	return &res.Details, nil
+	return res, nil
 }
 
 // MergeRequesters will merge secondary requesters into a primary requester.
-func (rs *RequesterServiceClient) MergeRequesters(ctx context.Context, id int, secondaryRequesterIDs []int) (*RequesterDetails, error) {
+func (rs *RequesterServiceClient) MergeRequesters(ctx context.Context, id int, secondaryRequesterIDs []int) (*Requester, error) {
 
 	url := &url.URL{
 		Scheme: "https",
@@ -245,5 +249,5 @@ func (rs *RequesterServiceClient) MergeRequesters(ctx context.Context, id int, s
 		return nil, err
 	}
 
-	return &res.Details, nil
+	return res, nil
 }
