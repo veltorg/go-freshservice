@@ -16,9 +16,9 @@ const RequesterURL = "/api/v2/requesters"
 // the Requester endpoints of the Freshservice API
 type RequesterService interface {
 	List(context.Context, QueryFilter) (*Requesters, string, error)
-	Create(context.Context, *Requester) (*Requester, error)
+	Create(context.Context, *RequesterDetails) (*Requester, error)
 	Get(context.Context, int) (*Requester, error)
-	Update(context.Context, int, *Requester) (*Requester, error)
+	Update(context.Context, int, *RequesterDetails) (*Requester, error)
 	Delete(context.Context, int) (*ErrorResponse, error)
 	Deactivate(context.Context, int) (*Requester, error)
 	Reactivate(context.Context, int) (*Requester, error)
