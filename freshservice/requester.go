@@ -15,7 +15,7 @@ const RequesterURL = "/api/v2/requesters"
 // RequesterService is an interface for interacting with
 // the Requester endpoints of the Freshservice API
 type RequesterService interface {
-	List(context.Context, QueryFilter) (*[]RequesterDetails, string, error)
+	List(context.Context, QueryFilter) ([]RequesterDetails, string, error)
 	Create(context.Context, *RequesterDetails) (*RequesterDetails, error)
 	Get(context.Context, int) (*RequesterDetails, error)
 	Update(context.Context, int, *RequesterDetails) (*RequesterDetails, error)
@@ -32,7 +32,7 @@ type RequesterServiceClient struct {
 }
 
 // List all freshservice Requesters
-func (rs *RequesterServiceClient) List(ctx context.Context, filter QueryFilter) (*[]RequesterDetails, string, error) {
+func (rs *RequesterServiceClient) List(ctx context.Context, filter QueryFilter) ([]RequesterDetails, string, error) {
 	url := &url.URL{
 		Scheme: "https",
 		Host:   rs.client.Domain,
@@ -54,7 +54,7 @@ func (rs *RequesterServiceClient) List(ctx context.Context, filter QueryFilter) 
 		return nil, "", err
 	}
 
-	return &res.List, HasNextPage(resp), nil
+	return res.List, HasNextPage(resp), nil
 }
 
 // Get a specific Freshservice Requester
