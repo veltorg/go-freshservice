@@ -15,15 +15,15 @@ const RequesterURL = "/api/v2/requesters"
 // RequesterService is an interface for interacting with
 // the Requester endpoints of the Freshservice API
 type RequesterService interface {
-	List(context.Context, QueryFilter) ([]RequesterDetails, string, error)
-	Create(context.Context, *RequesterDetails) (*RequesterDetails, error)
-	Get(context.Context, int) (*RequesterDetails, error)
-	Update(context.Context, int, *RequesterDetails) (*RequesterDetails, error)
-	Delete(context.Context, int) error
-	Deactivate(context.Context, int) (*RequesterDetails, error)
-	Reactivate(context.Context, int) (*RequesterDetails, error)
-	ConvertToAgent(context.Context, int) (*RequesterDetails, error)
-	MergeRequesters(context.Context, int, []int) (*RequesterDetails, error)
+	List(context.Context, QueryFilter) (*Requesters, string, error)
+	Create(context.Context, *Requester) (*Requester, error)
+	Get(context.Context, int) (*Requester, error)
+	Update(context.Context, int, *Requester) (*Requester, error)
+	Delete(context.Context, int) (*ErrorResponse, error)
+	Deactivate(context.Context, int) (*Requester, error)
+	Reactivate(context.Context, int) (*Requester, error)
+	ConvertToAgent(context.Context, int) (*Requester, error)
+	MergeRequesters(context.Context, int, []int) (*Requester, error)
 }
 
 // RequesterServiceClient facilitates requests with the RequesterService methods
