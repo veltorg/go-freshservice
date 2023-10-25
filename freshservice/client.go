@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"strconv"
 	"strings"
 	"time"
 )
@@ -98,11 +97,6 @@ func (fs *Client) makeRequest(r *http.Request, v interface{}) (*http.Response, e
 
 	if res.StatusCode == http.StatusNotFound {
 		return res, fmt.Errorf("%s %s not found", r.Method, r.URL)
-	}
-
-	if res.StatusCode < http.StatusOK || res.StatusCode > 299 {
-		v = ErrorResponse{}
-		return res, fmt.Errorf("%s: error making %s request to %s", strconv.Itoa(res.StatusCode), r.Method, r.URL)
 	}
 
 	if v == nil {
